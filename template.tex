@@ -48,10 +48,6 @@ Robotics boasts a significant benefit in accomplishing repeatable, tedious, or m
 
 The problem is that getting a robot to navigate any environment is challenging and is rooted in uncertainty. There are two things a robot must be able to do to autonomously navigate. It must understand the map of its environment, which is known as mapping. It must also know where it is on that map, which is known as localization. The problem is that in order for the robot to know where it is on the map, it must first understand the map, but in order for it to understand the map, it must first understand where it is on the map. This poses a major challenge because there are conflicting dependent conditions. The solution to this problem is doing both the mapping and the localization at the same time and this process is known as SLAM. SLAM means simultaneous localization and mapping and it's the method for getting a robot to autonomously navigate its environment. SLAM is still an open problem and new ways of solving the problems of navigation are still being researched constantly.
 
-    
-
-    
-
 
 \section{Technical Background}
 
@@ -63,83 +59,23 @@ Search and path planning involves finding a path from the robot’s current loca
 
 Coverage is a problem that certain robots such as robot vacuums need to be able to efficiently solve. If the robot has a map available to it, the problem of coverage becomes a lot easier. In this case, the robot would need all navigable spaces on the map until the whole map is covered, or the robot has accomplished its designated goal, such as searching for an object or reaching a destination. If the robot does not have a map available, there are certain heuristics it can follow such as following a continuous boundary like a wall. 
 
-SLAM is a difficult problem because it requires the robot to do two ongoing processes. One thing that makes SLAM difficult is the data association problem, or basically, the problem that certain locations on the map may look similar, which leads to ambiguity while the robot is navigating. When the robot is constructing a map, if it sees a particular chair at one location and then sees a similar chair at a different location, it would have a hard time distinguishing the two.
+SLAM is a difficult problem because it requires the robot to do two ongoing processes. One thing that makes SLAM difficult is the data association problem, or basically, the problem that certain locations on the map may look similar, which leads to ambiguity while the robot is navigating. When the robot is constructing a map, if it sees a particular chair at one location and then sees a similar chair at a different location, it would have a hard time distinguishing the two \textcite{Mataric2008TheRoboticsPrimer}.
 
-\begin{figure}
-    \includegraphics[width=\linewidth]{graph.jpg}
-    \caption{Maze and graph}
-    \label{fig1}
-  \end{figure}
-  
-Beyond the basic syntax, much of learning LaTeX is learning the different commands and environments that exist.
-For example, text can be made \textbf{bold} with \texttt{\textbackslash textbf}, \textit{italic} with \texttt{\textbackslash textit}, and \texttt{monospaced} with \texttt{\textbackslash texttt} (the \texttt{tt} stands for for ``teletype'').
-Single dollar signs denote inline equations, so \texttt{\$E = mc\textasciicircum 2\$} will be rendered as $E = mc^2$.
-Double dollar signs will render the equation in display mode, which we can see with the quadratic formula:
-$$\frac{{-b \pm \sqrt {b^2 - 4ac} }}{{2a}}$$
-There are also a handful of common environments: \texttt{itemize} for bulletpoint lists, \texttt{enumerate} for numbered lists, \texttt{figure} for figures, \texttt{tabular} for tables, and \texttt{lstlisting} for code listings.
-This covers the most frequently used commands, but as you might have already inferred, LaTeX is a vast and deep system, and can easily be overwhelming.
-We recommended following the \citetitle{Overleaf2021LearnLaTeXIn} tutorial \cite{Overleaf2021LearnLaTeXIn}, and examining and playing with the source of this document, to gain working proficiency with LaTeX.
-
-One final note on writing in LaTeX.
-Since LaTeX is only a markup language, the source files must be compiled into a viewable form, most commonly into a PDF file.
-The source of this document is made up of several files, each with its own purpose:
-\begin{itemize}
-    \item \texttt{template.tex} - The main LaTeX file containing the contents of the document.
-    \item \texttt{oxycomps.sty} - A style file with settings for what the document should look like.
-    \item \texttt{references.bib} - A list of bibliography items.
-    \item Other files containing images, build instructions, etc.
-\end{itemize}
-Manual compilation of these files is somewhat esoteric, as it requires multiple uses of the \texttt{pdflatex} and \texttt{biblatex} commands.
-Instead, it is much easier to use tools such as \texttt{latexmk} (in the terminal) or Overleaf (online) for compilation.
-We have also provided a \texttt{Makefile} which will automatically update the document as necessary; the use of makefiles is beyond the scope of this document, but see \textcite{Lambert2021MakefileTutorial}.
-
-\begin{comment}
-
-\begin{figure}[]
-    \begin{center}
-        \includegraphics[width=\linewidth]{figure.pdf}
-    \end{center}
+  \begin{figure}
+    \centering
+    \includegraphics[width=.95\linewidth]{graph.jpg}
     \caption{
-        Figure caption.
-        To get a figure to span two columns, use the {\tt figure*} environment rather than {\tt figure}.
-    }
-    \label{figure1}
+        Maze and graph}
+    \label{fig:Figure1}
 \end{figure}
-
-\begin{quote}
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Mauris pellentesque est nec nunc fringilla, a finibus nisl tempor.
-    Sed semper est massa, eget pulvinar neque posuere id.
-    Ut mauris tellus. 
-\end{quote}
-
-\begin{lstlisting}[language=Python]
-def hello():
-    print('hello, world!')
-\end{lstlisting}
-
-\end{comment}
-
-\begin{comment}
-No definition citations, unless the term itself is in dispute
-Separate problem background from technical background
-    Unclear if games and apps require much technical background
-    The general structure of the framework might be better suited for the Architecture Overview section
-        Eg. Flask uses decorators to associate functions with URLs
-        Eg. Unity has scripts associated with objects and specific triggers, such as walking into an area, pressing a button, etc.
-    Maybe a better name is "algorithmic background"?
-        Should explore what does and doesn't count
-            All ML counts
-            App and game frameworks do not
-        Framework vs. library?
-            I like the idea of [inversion of control](https://martinfowler.com/bliki/InversionOfControl.html), but that may be too abstract for students to understand
-        Heuristic: is understanding that system necessary to understand the results?
-            Ie. How Flask or Unity works doesn't influence whether the app/game is useful/fun/engaging
-            But how (say) linear regression works is highly relevant for why the results match/don't match the actual values
-\end{comment}
+  
 
 \section{Prior Work}
+As stated earlier, SLAM is still an open problem that is being researched. However, there is already a myriad of already-existing research that sheds light on the greatest advancements in the subject area. Although there are many solutions for solving the problems with SLAM, there are always arising obstacles depending on the application.
 
+In 2018, Geo Week News posted an online article explaining how SLAM is too power-intensive and too slow, which renders it useless for faster robots, such as fast drones. For small drones, SLAM is so power-intensive that there is not enough onboard processing capacity to handle the complex calculations. To combat this issue a new method called NanoMap is being used. Created by researchers at MIT’s Computer Science and Artificial Intelligence Lab (CSAIL), NanoMap uses 3D depth sensors to perform navigation fast, enabling autonomous drones to reach high speeds of up to 20 mph. Unlike SLAM, NanoMap does not generate a holistic map of the environment and uses some uncertainty when it comes to localization. It uses its depth sensors to gather 2D snapshots of its environment and then stores those snapshots. So when it reaches a location, it reaches into its memory and tries to figure out where it is based on how closely related one of the images is to what it is currently seeing \textcite{GeoWeekNewsStaff2018NanoMap}. This is not an ideal approach as there is just too much uncertainty involved, but it does reveal a shortcut that could potentially be useful if it could somehow be combined with SLAM.
+
+Madeline Shiappa, a PhD student at UCF sheds some light on learning methods for SLAM, including the Kalman Filter, which is the most common learning method for SLAM. The Kalman Filter is a type of Bayes Filter used for state estimation It is a recursive algorithm that makes a prediction then goes back and corrects the prediction over time. In order to correct the prediction, sensors are necessary. There are two categories of sensors: proprioceptive and exteroceptive. The exteroceptive sensors are the ones that collect information from the robot’s environment such as if there’s an object in front of the robot and some of these sensors include sonar, range lasers, and cameras. Proprioceptive sensors collect information that is internal to the robot, such as its position and acceleration, using encoders, gyroscopes, and accelerometers. The combination of these two types of sensors produces a very effective feedback system. Madeline Shiappa also acknowledges the computational complexity as a limitation of SLAM. The more dimension in states and measurements, the more intractable the calculations become, which creates a tradeoff between accuracy and complexity \textcite{Schiappa2019HowDoesAutonomous}.
 \subsection{Goals}
 
 \subsection{Audience}
