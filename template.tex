@@ -28,7 +28,7 @@
     /Author (Maryo Botros)
 }
 
-\title{Writing Your Oxy CS Comps Paper in \LaTeX}
+\title{SLAM}
 
 \author{Maryo Botros}
 \affiliation{Occidental College}
@@ -39,37 +39,38 @@
 \maketitle
 
 \begin{abstract}
-    This document serves as an introduction to {\LaTeX} and also describes the requirements of the senior project final paper for Occidental College's Computer Science majors.
-    We start by justifying the use of {\LaTeX} over Word, Google Docs, and other What-You-See-Is-What-You-Get (WYSISYG) editors.
-    A brief tutorial to {\LaTeX} follows, reviewing the most common commands used in paper writing.
-    We then turn our attention to the Oxy CS Comps Paper, first contextualizing it within the major curriculum, before exploring each major section of the paper in detail.
-    We conclude with some miscellaneous tips for successfully completing comps.
+    Abstract
 \end{abstract}
 
-\section{Introduction}
+\section{Problem Context}
 
-\section{Using \LaTeX}
+Robotics boasts a significant benefit in accomplishing repeatable, tedious, or menial tasks at high effieciencies and with great resource utilization. Robots can increase relative productivity and decrease resource and energy consumption by multiple orders of magnitude for processes. They can also offer high-precision with limited human oversight for the tasks they are designed for. The real benefit of robotics comes in where robotics can serve as a substitute for human labor, more specifically, human labor that can potentially put humans in harm's way and some of the best robots for accomplishing this task are vehicles that can navigate autonomously. An example of one of these tasks includes using the robot to enter a building on fire to search for and potentially rescue people. Another application can be for military applications, such as reconnaissance. These are just two of the many possible applications of autonomous vehicles. These robots are very useful, but getting them to accomplish the task of being autonomous does not come easily.
 
-LaTeX (pronounced \textit{lah-teck} or \textit{lay-teck}), often stylized as {\LaTeX} and written as latex, is a document markup language and typesetting system.
-Building on the {\TeX} language created by Donald Knuth in 1978, LaTeX provides additional commands for common document needs such as sections, figures, and bibliograhpies.
-LaTeX is widely used in academia, especially in mathematical fields, due to how easy it is to write mathematical equations and its automatic management of references.
-Since it is a markup language, LaTeX source files are written in plain text, which also makes it compatible with version control systems like git.
+The problem is that getting a robot to navigate any environment is challenging and is rooted in uncertainty. There are two things a robot must be able to do to autonomously navigate. It must understand the map of its environment, which is known as mapping. It must also know where it is on that map, which is known as localization. The problem is that in order for the robot to know where it is on the map, it must first understand the map, but in order for it to understand the map, it must first understand where it is on the map. This poses a major challenge because there are conflicting dependent conditions. The solution to this problem is doing both the mapping and the localization at the same time and this process is known as SLAM. SLAM means simultaneous localization and mapping and it's the method for getting a robot to autonomously navigate its environment. SLAM is still an open problem and new ways of solving the problems of navigation are still being researched constantly.
 
-The most primitive syntax of LaTeX is the \textit{macro} or \textit{command}, which is always written with a backslash followed by the name of the command.
-The {\LaTeX} glyph, for example, can be created with the command \texttt{\textbackslash LaTeX}.
-Some commands take parameters, which are denoted in braces (e.g., \texttt{\textbackslash usepackage\{biblatex\}} will import the \texttt{biblatex} package), with some commands additionally accepting options in square brackets (e.g., \texttt{\textbackslash usepackage[style=numeric]\{biblatex\}}).
-The \texttt{\textbackslash begin} and \texttt{\textbackslash end} commands are special, as they indicate the start of an \textit{environment}.
-The content of LaTeX documents, for example, are surrounded by \texttt{\textbackslash begin\{document\}} and \texttt{\textbackslash end\{document\}}, indicating the text that should appear in the document.
+    
+
+    
+
+
+\section{Technical Background}
+
+A few of the problems involved with navigation that will be covered in this project are localization, searching for the goal location, planning a path to the goal location, covering an entire area, and SLAM.
+
+One of the ways localization is accomplished for robots is using odometry or the distance the robot has traveled. Shaft encoders are the sensors used for odometry. One problem with this however is that the farther the robot has traveled, the more inaccurate the odometry will be because measurements of the physical environment are unavoidable.
+
+Search and path planning involves finding a path from the robot’s current location, to the destination. Two things that the robot would have to know to do this are what the map looks like as well as where it is on that map (localization). It must know both of these within a common frame of reference. There are typically many different paths for getting to the destination from the starting point. Graphs with nodes and lines are usually used for modeling a map. The criterion for the optimal path can be safety or distance for example and finding the optimal path may require searching all paths. A maze is one of the best ways of testing a robot’s ability to get to a goal location. One of the methods for solving a maze can be programming the robot to follow one of the walls of the maze. This method will work but it is the naive solution and is not the most efficient as it can take a long time, depending on the complexity of the maze. A much more optimal solution for solving a maze is by using a depth-first search approach, where the robot will keep track of each path option in the maze as a node and it will go down all the nodes along a single path first before it backtracks and then goes along a different path until it has found the exit to the maze. The way this would be executed is by using a graph data structure, like the one in Figure 1. The graph is a good model for the maze. Each junction in the maze is recorded as a node in the graph model. There are several other algorithms besides the depth-first search for navigating the maze, such as a breadth-first search, but this is one of the most efficient solutions.
+
+Coverage is a problem that certain robots such as robot vacuums need to be able to efficiently solve. If the robot has a map available to it, the problem of coverage becomes a lot easier. In this case, the robot would need all navigable spaces on the map until the whole map is covered, or the robot has accomplished its designated goal, such as searching for an object or reaching a destination. If the robot does not have a map available, there are certain heuristics it can follow such as following a continuous boundary like a wall. 
+
+SLAM is a difficult problem because it requires the robot to do two ongoing processes. One thing that makes SLAM difficult is the data association problem, or basically, the problem that certain locations on the map may look similar, which leads to ambiguity while the robot is navigating. When the robot is constructing a map, if it sees a particular chair at one location and then sees a similar chair at a different location, it would have a hard time distinguishing the two.
 
 \begin{figure}
-    \centering
-    \includegraphics[width=.95\linewidth]{first-page.png}
-    \caption{
-        The first page of this template when compiled.
-    }
-    \label{structures}
-\end{figure}
-
+    \includegraphics[width=\linewidth]{graph.jpg}
+    \caption{Maze and graph}
+    \label{fig1}
+  \end{figure}
+  
 Beyond the basic syntax, much of learning LaTeX is learning the different commands and environments that exist.
 For example, text can be made \textbf{bold} with \texttt{\textbackslash textbf}, \textit{italic} with \texttt{\textbackslash textit}, and \texttt{monospaced} with \texttt{\textbackslash texttt} (the \texttt{tt} stands for for ``teletype'').
 Single dollar signs denote inline equations, so \texttt{\$E = mc\textasciicircum 2\$} will be rendered as $E = mc^2$.
@@ -137,7 +138,7 @@ Separate problem background from technical background
             But how (say) linear regression works is highly relevant for why the results match/don't match the actual values
 \end{comment}
 
-\section{The Oxy CS Comps Paper}
+\section{Prior Work}
 
 \subsection{Goals}
 
@@ -148,6 +149,7 @@ Separate problem background from technical background
 \section{Sections of the Oxy CS Comps Paper}
 
 \subsection{Introduction and Background}
+
 
 \subsection{Prior Work}
 
